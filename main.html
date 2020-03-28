@@ -1,22 +1,71 @@
+<!doctype html>
 <html>
 	<head>
-		<title>Laterals_task</title>
-		<center><h3>Docker info</h3></center>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    	<link rel="stylesheet" type="text/css" href="bootstrap.css">
+    	<link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+    	<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+    	<link rel="stylesheet" href="index.css">
+    	<style type="text/css">
+      		body{
+       			background-margin:100;
+      		}
+      		.para{
+		        font-family: 'Titillium Web', sans-serif;
+		     }
+      	</style>
+		<title>Docker Manager</title>
+		<div class="container">
+			<h3 class="text-capitalize font-weight-bold mt-3">Docker Manager</h3>
+		</div>
 	</head>
 	<body>
-		<ul>
-			<li><button type="button" onclick="a()">List Running Containers</button></li>
-			<li><button type="button" onclick="b()">List available images</button></li>
-			<li><button type="button" onclick="c()">List all containers</button></li>
-			<li><button type="button" onclick="d()">Stop Container</button><input id="stop" type="text" placeholder="ID or name of container"></li>
-			<li><button type="button" onclick="e()">Start Conatiner</button><input id="start" type="text" placeholder="ID or name of container"></li>
-			<li><button type="button" onclick="f()">Restart Container</button><input id="restart" type="text" placeholder="ID or name of container"></li>
-			<li><button type="button" onclick="g()">Get Container logs</button><input id="logs" type="text" placeholder="ID or name of container"></li>
-			<li><button type="button" onclick="h()">Web shell for Container</button><input id="shell" type="text" placeholder="ID or name of container"></li>
-		</ul>
-		<ul>
-			<p id="ans"></p>
-		</ul>
+		<div class="container">
+        	<div class="jumbotron bg-grey">
+          		<div class="about">
+            		<button type="button" name="list_running_containers" id="button1" class="button3 bg-transparent mt-4 ml-5" onclick="a()">List Running Containers</button>
+          		</div>
+          		<div class="about">
+            		<button type="button" name="list_images" id="button2" class="button4 bg-transparent mt-4 ml-5" onclick="b()">List Available Images</button>
+          		</div>
+          		<div class="about">
+            		<button type="button" name="list_all_containers" id="button3" class="button5 bg-transparent mt-4 ml-5" onclick="c()">List All Containers</button>
+          		</div>
+          	</div>
+          	<div class="container mt-5">
+          		<div class="about1">
+            		<input id="input1" type="text" class="input1" placeholder="ID or name of container">
+          		</div>
+          		<div class="about1">
+            		<input id="input2" type="text" class="input2" placeholder="ID or name of container">
+          		</div>
+          		<div class="about1">
+            		<input id="input3" type="text" class="input3" placeholder="ID or name of container">
+          		</div>
+          		<div class="about1">
+            		<input id="input4" type="text" class="input4" placeholder="ID or name of container">
+          		</div>
+          		<div class="about1">
+            		<button type="button" name="stop_container" id="button4" class="button6 bg-transparent mt-4 ml-5" onclick="d()">Stop Container</button>
+          		</div>
+          		<div class="about1">
+            		<button type="button" name="start_container" id="button5" class="button7 bg-transparent mt-4 ml-5" onclick="e()">Start Container</button>
+          		</div>
+          		<div class="about1">
+            		<button type="button" name="restart_container" id="button6" class="button8 bg-transparent mt-4 ml-5" onclick="f()">Restart Container</button>
+          		</div>
+          		<div class="about1">
+            		<button type="button" name="container_logs" id="button7" class="button9 bg-transparent mt-4 ml-5" onclick="g()">Container Logs</button>
+          		</div>
+          	</div>
+          	<div class="container">
+          		<div class="jumbotron bg-dark jumbo1" id="ans">
+
+          		</div>
+          	</div>
+        </div>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script>
 			function a(){
@@ -25,9 +74,23 @@
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	            	var obj = JSON.parse(req);
+	           		var obj1 = JSON.parse(obj.message);
+	           		if(obj1==""){
+	           			const p = document.createElement('p');
+		           		p.textContent = "No Container is alive";
+		           		hello.appendChild(p);
+		           		hello.style.color = "white";
+	           		}
+	           		else{
+	           			obj1.forEach((message) => {
+			            	const li = document.createElement('li');
+			            	var i = message.Id.slice(0, 12).trim();
+				            li.textContent = message.Image + " , " + i;
+				            hello.appendChild(li);
+				        })
+				        hello.style.color = "white";
+	           		}
 				});
 			}
 			function b(){
@@ -36,9 +99,17 @@
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	            	var obj = JSON.parse(req);
+	           		var obj1 = JSON.parse(obj.message);
+	           		const p = document.createElement('p');
+	           		p.textContent = "Example: If output is 'xyz:latest , sha256:b65575bf92725cad124e7c0d35d479ee23a3281cf066dcaba86c311bbe5e0e31', then the image name is 'xyz' and image id is first 12 digit of sha256 i.e., b65575bf9272 in this case";
+	           		hello.appendChild(p);
+			        obj1.forEach((message) => {
+		            	const li = document.createElement('li');
+			            li.textContent = (message.RepoTags)[0] + " , " + message.Id;
+			            hello.appendChild(li);
+			        })
+			        hello.style.color = "white";
 				});
 			}
 			function c(){
@@ -47,61 +118,80 @@
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	            	var obj = JSON.parse(req);
+	           		var obj1 = JSON.parse(obj.message);
+			        obj1.forEach((message) => {
+			        	console.log(message);
+		            	const li = document.createElement('li');
+		            	var i = message.Id.slice(0, 12).trim();
+			            li.textContent = message.Image + " , " + i;
+			            hello.appendChild(li);
+			        })
+			        hello.style.color = "white";
 				});
 			}
 			function d(){
-				var id = document.getElementById('stop').value;
-				document.getElementById('stop').value = "";
+				var id = document.getElementById('input1').value;
+				console.log(id);
+				document.getElementById('input1').value = "";
 				$.post('stop_container',{'id':id},function(req,res){
 					hello = document.getElementById('ans');
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	           		const p = document.createElement('p');
+	           		p.textContent = "Done";
+	           		hello.appendChild(p);
+			        hello.style.color = "white";
 				});
 			}
 			function e(){
-				var id = document.getElementById('start').value;
-				document.getElementById('start').value = "";
+				var id = document.getElementById('input2').value;
+				document.getElementById('input2').value = "";
 				$.post('start_conatiner',{'id':id},function(req,res){
 					hello = document.getElementById('ans');
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	           		const p = document.createElement('p');
+	           		p.textContent = "Done";
+	           		hello.appendChild(p);
+			        hello.style.color = "white";
 				});
 			}
 			function f(){
-				var id = document.getElementById('restart').value;
-				document.getElementById('restart').value = "";
+				var id = document.getElementById('input3').value;
+				document.getElementById('input3').value = "";
 				$.post('restart_container',{'id':id},function(req,res){
 					hello = document.getElementById('ans');
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	           		const p = document.createElement('p');
+	           		p.textContent = "Done";
+	           		hello.appendChild(p);
+			        hello.style.color = "white";
 				});
 			}
 			function g(){
-				var id = document.getElementById('logs').value;
-				document.getElementById('logs').value = "";
+				var id = document.getElementById('input4').value;
+				document.getElementById('input4').value = "";
 				$.post('get_container_logs',{'id':id},function(req,res){
 					hello = document.getElementById('ans');
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
+	            	var obj = JSON.parse(req);
+	           		var res = obj.message.split("exit");
+	           		res.forEach((message) => {
+			        	console.log(message);
+		            	const li = document.createElement('li');
+		            	var res1 = message.split("]");
+		            	console.log(res1);
+			            li.textContent = res1[0];
+			            hello.appendChild(li);
+			        })
+			        hello.style.color = "white";
 				});
 			}
 			function h(){

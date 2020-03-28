@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/',function(req,res){
+app.get('/main',function(req,res){
 	res
-    .status(200)
+        .status(200)
 		.sendFile(path.join(__dirname,"main.html"));
 });
 
@@ -19,13 +19,10 @@ app.get('/session',function(req,res){
 })
 
 app.post('/list_running_containers',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker ps', (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "error";
-      } else {
-       var message = `stdout: ${stdout}`;
+    var request = require('request');
+    request('http://localhost:5000/containers/json', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = body;
       }
       data = new Object();
       data.message = message;
@@ -34,14 +31,12 @@ app.post('/list_running_containers',function(req,res){
     });
 });
 
+
 app.post('/list_available_images',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker images', (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "error";
-      } else {
-       var message = `stdout: ${stdout}`;
+    var request = require('request');
+    request('http://localhost:5000/images/json', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = body;
       }
       data = new Object();
       data.message = message;
@@ -51,13 +46,10 @@ app.post('/list_available_images',function(req,res){
 });
 
 app.post('/list_all_containers',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker ps -a', (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "error";
-      } else {
-       var message = `stdout: ${stdout}`;
+    var request = require('request');
+    request('http://localhost:5000/containers/json?all=1', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = body;
       }
       data = new Object();
       data.message = message;
@@ -67,13 +59,10 @@ app.post('/list_all_containers',function(req,res){
 });
 
 app.post('/stop_container',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker stop '+req.body.id, (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "Container is not active";
-      } else {
-       var message = "Done";
+    var request = require('request');
+    request.post('http://localhost:5000/containers/'+req.body.id+'/stop', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = "Done";
       }
       data = new Object();
       data.message = message;
@@ -83,13 +72,10 @@ app.post('/stop_container',function(req,res){
 });
 
 app.post('/start_conatiner',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker start '+req.body.id, (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "Container is already active";
-      } else {
-       var message = "Done";
+    var request = require('request');
+    request.post('http://localhost:5000/containers/'+req.body.id+'/start', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = "Done";
       }
       data = new Object();
       data.message = message;
@@ -99,13 +85,10 @@ app.post('/start_conatiner',function(req,res){
 });
 
 app.post('/restart_container',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker restart '+req.body.id, (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "error";
-      } else {
-       var message = "Done";
+    var request = require('request');
+    request.post('http://localhost:5000/containers/'+req.body.id+'/restart', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = "Done";
       }
       data = new Object();
       data.message = message;
@@ -115,13 +98,10 @@ app.post('/restart_container',function(req,res){
 });
 
 app.post('/get_container_logs',function(req,res){
-    const { exec } = require('child_process');
-    exec('sudo docker container logs --timestamps '+req.body.id, (err, stdout, stderr) => {
-      if (err) {
-        console.error("error");
-        var message = "error";
-      } else {
-       var message = `stdout: ${stdout}`;
+    var request = require('request');
+    request('http://localhost:5000/containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1&follow=1&tail=10&since=1428990821', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = body;
       }
       data = new Object();
       data.message = message;
@@ -131,7 +111,6 @@ app.post('/get_container_logs',function(req,res){
 });
 
 app.post('/web_shell_for_container',function(req,res){
-    var message = "To open a tty session of the container "+req.body.id+", go to http://localhost:4000/session";
     data = new Object();
     data.message = message;
     var str = JSON.stringify(data);

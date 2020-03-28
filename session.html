@@ -8,10 +8,10 @@
       <script>
         var term = new Terminal();
         term.open(document.getElementById('terminal'));
-        term.write('Hello from \x1B[1;3;31mxterm.js\x1B[0m $ ')
-        document.getElementById("terminal").addEventListener("keypress", submitOnEnter);
+        term.write('#:$~ ');
+        document.getElementById('terminal').addEventListener("keypress", submitOnEnter);
         function submitOnEnter(event){
-          console.log("hello");
+          term.write(event.target.value);
           if(event.which === 32 && event.target.value === ""){
             event.preventDefault();
             event.target.value = "";
