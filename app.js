@@ -12,6 +12,12 @@ app.get('/',function(req,res){
 		.sendFile(path.join(__dirname,"main.html"));
 });
 
+app.get('/session',function(req,res){
+    res
+        .status(200)
+        .sendFile(path.join(__dirname,"session.html"));
+})
+
 app.post('/list_running_containers',function(req,res){
     const { exec } = require('child_process');
     exec('sudo docker ps', (err, stdout, stderr) => {
