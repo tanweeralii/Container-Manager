@@ -1,0 +1,122 @@
+<html>
+	<head>
+		<title>Lateral_task</title>
+		<center><h3>Docker info</h3></center>
+	</head>
+	<body>
+		<ul>
+			<li><button type="button" onclick="a()">List Running Containers</button></li>
+			<li><button type="button" onclick="b()">List available images</button></li>
+			<li><button type="button" onclick="c()">List all containers</button></li>
+			<li><button type="button" onclick="d()">Stop Container</button><input id="stop" type="text" placeholder="ID or name of container"></li>
+			<li><button type="button" onclick="e()">Start Conatiner</button><input id="start" type="text" placeholder="ID or name of container"></li>
+			<li><button type="button" onclick="f()">Restart Container</button><input id="restart" type="text" placeholder="ID or name of container"></li>
+			<li><button type="button" onclick="g()">Get Container logs</button><input id="logs" type="text" placeholder="ID or name of container"></li>
+			<li><button type="button" onclick="h()">Web shell for Container</button><input id="shell" type="text" placeholder="ID or name of container"></li>
+		</ul>
+		<ul>
+			<p id="ans"></p>
+		</ul>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			function a(){
+				$.post('list_running_containers',function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function b(){
+				$.post('list_available_images',function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function c(){
+				$.post('list_all_containers',function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function d(){
+				var id = document.getElementById('stop').value;
+				document.getElementById('stop').value = "";
+				$.post('stop_container',{'id':id},function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function e(){
+				var id = document.getElementById('start').value;
+				document.getElementById('start').value = "";
+				$.post('start_conatiner',{'id':id},function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function f(){
+				var id = document.getElementById('restart').value;
+				document.getElementById('restart').value = "";
+				$.post('restart_container',{'id':id},function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function g(){
+				var id = document.getElementById('logs').value;
+				document.getElementById('logs').value = "";
+				$.post('get_container_logs',{'id':id},function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+			function h(){
+				var id = document.getElementById('shell').value;
+				document.getElementById('shell').value = "";
+				$.post('web_shell_for_container',{'id':id},function(req,res){
+					hello = document.getElementById('ans');
+					while(hello.firstChild){
+		            	hello.removeChild(hello.firstChild);
+		        	}
+	            	const li = document.createElement('li');
+	            	li.textContent = req;
+	            	hello.appendChild(li);
+				});
+			}
+		</script>
+	</body>
+</html>
