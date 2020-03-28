@@ -8,27 +8,7 @@
       <script>
         var term = new Terminal();
         term.open(document.getElementById('terminal'));
-        term.write('#:$~ ');
-        document.getElementById('terminal').addEventListener("keypress", submitOnEnter);
-        function submitOnEnter(event){
-          term.write(event.target.value);
-          if(event.which === 32 && event.target.value === ""){
-            event.preventDefault();
-            event.target.value = "";
-          }else if(event.which === 13 && event.target.value === ""){
-            event.preventDefault();
-            event.target.value = "";
-          }else if(event.which  === 13){
-            console.log("Something has been written");
-            var text1 = event.target.value;
-            var text = text1.replace(/  +/g, ' ');
-            event.preventDefault();
-            event.target.value = "";
-            var json_data = {};
-            var json_data1 = JSON.stringify(json_data);
-            socket.send(json_data1);
-          } 
-        }
+        term.write('#:$~ '); 
       </script>
   </body>
 </html>
