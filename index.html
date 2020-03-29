@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Web Shell</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+		<div class="container">
+			<textarea id="tty" rows="2" cols="100" placeholder="Write your command here"></textarea>
+		</div>
+	</head>
+	<body>
+		<style type="text/css">
+      		body{
+      			background-color:#000000;
+       			background-margin:100;
+      		}
+      		.para{
+		        font-family: 'Titillium Web', sans-serif;
+		     }
+      	</style>
+      	<div class="container">
+      		<div id="output"></div>
+      	</div>
+      	<script src="http://code.jquery.com/jquery-latest.js"></script>
+      	<script type="text/javascript">
+      		function submitOnEnter(event){
+				if(event.which === 32 && event.target.value === ""){
+					event.preventDefault();
+        			event.target.value = "";
+				}else if(event.which === 13 && event.target.value === ""){
+					event.preventDefault();
+        			event.target.value = "";
+				}else if(event.which  === 13){
+	       			var text = event.target.value;
+	   				event.preventDefault();
+	        		event.target.value = "";
+	        		var id = sessionStorage.getItem('id');
+
+	       			$.post('terminal_session',{"text":text,"id":id},function(data, status){
+	  					hello = document.getElementById('output');
+	  					const li = document.createElement('li');
+	  					var obj = JSON.parse(data);
+	  					var obj1 = JSON.parse(obj.message);
+				        li.textContent = obj1.Id;
+				        hello.appendChild(li);
+				        hello.style.color="red";
+	  				});
+	       		}	
+    		}
+    		document.getElementById("tty").addEventListener("keypress", submitOnEnter);
+      	</script>
+	</body>
+</html>

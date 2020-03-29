@@ -12,10 +12,10 @@ app.get('/main',function(req,res){
 		.sendFile(path.join(__dirname,"main.html"));
 });
 
-app.get('/session',function(req,res){
+app.get('/index',function(req,res){
     res
         .status(200)
-        .sendFile(path.join(__dirname,"session.html"));
+        .sendFile(path.join(__dirname,"index.html"));
 })
 
 app.post('/list_running_containers',function(req,res){
@@ -110,11 +110,17 @@ app.post('/get_container_logs',function(req,res){
     });
 });
 
-app.post('/web_shell_for_container',function(req,res){
-    data = new Object();
-    data.message = message;
-    var str = JSON.stringify(data);
-    res.send(str);
+app.post('/terminal_session',function(req,res){
+    var request = require('request');
+    request('http://localhost:5000/containers/'+req.body.id+'/exec?'+req.body.text, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = body;
+      }
+      data = new Object();
+      data.message = message;
+      var str = JSON.stringify(data);
+      res.send(str);
+    });
 });
 
 app.listen(4000);

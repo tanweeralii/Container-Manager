@@ -18,7 +18,13 @@
       	</style>
 		<title>Docker Manager</title>
 		<div class="container">
-			<h3 class="text-capitalize font-weight-bold mt-3">Docker Manager</h3>
+			<div class="app">
+				<h3 class="text-capitalize font-weight-bold mt-3">Docker Manager</h3>
+			</div>
+			<div class="app">
+				<button type="button" name="get_tty" id="button8" class="button10 bg-transparent mt-4 ml-5" onclick="h()">TTY session</button>
+				<input id="input5" type="text" class="input5" placeholder="ID or name of container">
+			</div>
 		</div>
 	</head>
 	<body>
@@ -195,17 +201,17 @@
 				});
 			}
 			function h(){
-				var id = document.getElementById('shell').value;
-				document.getElementById('shell').value = "";
-				$.post('web_shell_for_container',{'id':id},function(req,res){
-					hello = document.getElementById('ans');
-					while(hello.firstChild){
-		            	hello.removeChild(hello.firstChild);
+				var id = document.getElementById('input5').value;
+				document.getElementById('input5').value = "";
+				sessionStorage.setItem("id", id);
+				hello = document.getElementById('ans');
+				while(hello.firstChild){
+		            		hello.removeChild(hello.firstChild);
 		        	}
-	            	const li = document.createElement('li');
-	            	li.textContent = req;
-	            	hello.appendChild(li);
-				});
+		        	const li = document.createElement('li');
+			    	li.textContent = "To open web shell, go to http://localhost:4000/index";
+			    	hello.appendChild(li);
+			    	hello.style.color = "white";
 			}
 		</script>
 	</body>
