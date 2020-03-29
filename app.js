@@ -112,9 +112,25 @@ app.post('/get_container_logs',function(req,res){
 
 app.post('/terminal_session',function(req,res){
     var request = require('request');
-    request('http://localhost:5000/containers/'+req.body.id+'/exec?'+req.body.text, function (error, response, body) {
+    request.post('http://localhost:5000/containers/'+req.body.id+'/exec',{"AttachStdin": true,
+        "AttachStdout": true,
+        "AttachStderr": true,
+        "DetachKeys": "ctrl-p,ctrl-q",
+        "Tty": true,
+        "Cmd": ["bin/bash","-c","touch appa.py"],
+        "Env": ["FOO=bar","BAZ=quux"],
+        "FOO=bar"
+        "BAZ=quux"],
+        "Privileged":true,
+        "User":"root"}, function (error, response, body) {
       if (!error && response.statusCode == 200) {
-        var message = body;
+        var message1 = JSON.parse(data);
+        var obj = message1.Id;
+      }
+      request.post('http://localhost:5000/containers/exec'+obj+'/start',{"Detach": true,"Tty": true
+        }, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var message = data;
       }
       data = new Object();
       data.message = message;

@@ -186,21 +186,17 @@
 					hello = document.getElementById('ans');
 					while(hello.firstChild){
 		            	hello.removeChild(hello.firstChild);
-		        	}
-	            	var obj = JSON.parse(req);
+					}
+					var obj = JSON.parse(req);
 	           		var res = obj.message.split("exit");
 	           		res.forEach((message) => {
-			        	console.log(message);
 		            	const li = document.createElement('li');
-		            	var res1 = message.split("]");
-		            	console.log(res1);
-			            li.textContent = res1[0];
+		            	var res1 = message.split("exit");
+			            li.textContent = res1;
 			            hello.appendChild(li);
 			        })
 			        hello.style.color = "white";
-				});
-			}
-			function h(){
+				function h(){
 				var id = document.getElementById('input5').value;
 				document.getElementById('input5').value = "";
 				sessionStorage.setItem("id", id);
