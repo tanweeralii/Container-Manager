@@ -8,14 +8,6 @@
     		<link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
     		<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
     		<link rel="stylesheet" href="index.css">
-    		<style type="text/css">
-      		body{
-       			background-margin:100;
-      		}
-      		.para{
-		        font-family: 'Titillium Web', sans-serif;
-		}
-      	</style>
 		<title>Docker Manager</title>
 		<div class="container">
 			<h3 class="text-capitalize font-weight-bold mt-3">Docker Manager</h3>
@@ -25,13 +17,13 @@
 		<div class="container">
         	<div class="jumbotron bg-grey">
           		<div class="about">
-            		<button type="button" name="list_running_containers" id="button1" class="button3 bg-transparent mt-4 ml-5" onclick="a()">List Running Containers</button>
+            		<button type="button" name="list_running_containers" id="button1" class="button3 bg-transparent mt-4 ml-5" onclick="list_running_containers()">List Running Containers</button>
           		</div>
           		<div class="about">
-            		<button type="button" name="list_images" id="button2" class="button4 bg-transparent mt-4 ml-5" onclick="b()">List Available Images</button>
+            		<button type="button" name="list_images" id="button2" class="button4 bg-transparent mt-4 ml-5" onclick="list_available_images()">List Available Images</button>
           		</div>
           		<div class="about">
-            		<button type="button" name="list_all_containers" id="button3" class="button5 bg-transparent mt-4 ml-5" onclick="c()">List All Containers</button>
+            		<button type="button" name="list_all_containers" id="button3" class="button5 bg-transparent mt-4 ml-5" onclick="list_all_containers()">List All Containers</button>
           		</div>
           	</div>
           	<div class="container mt-5">
@@ -48,16 +40,16 @@
             		<input id="input4" type="text" class="input4" placeholder="ID or name of container">
           		</div>
           		<div class="about1">
-            		<button type="button" name="stop_container" id="button4" class="button6 bg-transparent mt-4 ml-5" onclick="d()">Stop Container</button>
+            		<button type="button" name="stop_container" id="button4" class="button6 bg-transparent mt-4 ml-5" onclick="stop_container()">Stop Container</button>
           		</div>
           		<div class="about1">
-            		<button type="button" name="start_container" id="button5" class="button7 bg-transparent mt-4 ml-5" onclick="e()">Start Container</button>
+            		<button type="button" name="start_container" id="button5" class="button7 bg-transparent mt-4 ml-5" onclick="start_container()">Start Container</button>
           		</div>
           		<div class="about1">
-            		<button type="button" name="restart_container" id="button6" class="button8 bg-transparent mt-4 ml-5" onclick="f()">Restart Container</button>
+            		<button type="button" name="restart_container" id="button6" class="button8 bg-transparent mt-4 ml-5" onclick="restart_container()">Restart Container</button>
           		</div>
           		<div class="about1">
-            		<button type="button" name="container_logs" id="button7" class="button9 bg-transparent mt-4 ml-5" onclick="g()">Container Logs</button>
+            		<button type="button" name="container_logs" id="button7" class="button9 bg-transparent mt-4 ml-5" onclick="container_logs()">Container Logs</button>
           		</div>
           	</div>
           	<div class="container">

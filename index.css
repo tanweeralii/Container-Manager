@@ -1,3 +1,6 @@
+body{
+  background-margin:100;
+}
 .about{
   float:left;
   font-size:15px;

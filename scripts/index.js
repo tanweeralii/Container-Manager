@@ -1,4 +1,4 @@
-function a(){
+function list_running_containers(){
 	$.post('list_running_containers',function(req,res){
 		hello = document.getElementById('ans');
 		while(hello.firstChild){
@@ -23,7 +23,7 @@ function a(){
 	        		}
 	});
 }
-function b(){
+function list_available_images(){
 	$.post('list_available_images',function(req,res){
 		hello = document.getElementById('ans');
 		while(hello.firstChild){
@@ -42,7 +42,7 @@ function b(){
         hello.style.color = "white";
 	});
 }
-function c(){
+function list_all_containers(){
 	$.post('list_all_containers',function(req,res){
 		hello = document.getElementById('ans');
 		while(hello.firstChild){
@@ -60,7 +60,7 @@ function c(){
         hello.style.color = "white";
 	});
 }
-function d(){
+function stop_container(){
 	console.log(id);
 				document.getElementById('input1').value = "";
 				$.post('stop_container',{'id':id},function(req,res){
@@ -74,7 +74,7 @@ function d(){
 			        hello.style.color = "white";
 				});
 			}
-function e(){
+function start_container(){
 	var id = document.getElementById('input2').value;
 	document.getElementById('input2').value = "";
 	$.post('start_conatiner',{'id':id},function(req,res){
@@ -88,7 +88,7 @@ function e(){
         hello.style.color = "white";
 	});
 }
-function f(){
+function restart_container(){
 	var id = document.getElementById('input3').value;
 	document.getElementById('input3').value = "";
 	$.post('restart_container',{'id':id},function(req,res){
@@ -102,7 +102,7 @@ function f(){
         hello.style.color = "white";
 	});
 }
-function g(){
+function container_logs(){
 	var id = document.getElementById('input4').value;
 	document.getElementById('input4').value = "";
 	$.post('get_container_logs',{'id':id},function(req,res){
