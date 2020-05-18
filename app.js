@@ -24,10 +24,7 @@ app.post('/list_running_containers',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
@@ -38,10 +35,7 @@ app.post('/list_available_images',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
@@ -51,10 +45,7 @@ app.post('/list_all_containers',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
@@ -64,10 +55,7 @@ app.post('/stop_container',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
@@ -77,10 +65,7 @@ app.post('/start_conatiner',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
@@ -90,10 +75,7 @@ app.post('/restart_container',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
@@ -103,10 +85,7 @@ app.post('/get_container_logs',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      data = new Object();
-      data.message = message;
-      var str = JSON.stringify(data);
-      res.send(str);
+      res.json({message});
     });
 });
 
