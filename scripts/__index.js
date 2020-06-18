@@ -130,11 +130,7 @@ jQuery(function($, undefined) {
  
  //  if (command == 'social'){ .  This was wrong. 
    else if (command == 'social'){
-     this.echo("mailto:gaurav.dev.iiitm@gmail.com\n")
-     this.echo("https://www.github.com/chowmean\n")
-     this.echo("https://www.facebook.com/chowmean\n")
-     this.echo("https://www.twitter.com/gauravchowmean\n")
-     this.echo("https://www.linkedin.com/in/chowmean\n")
+     this.echo("mailto:tanweerali908@gmail.com\n")
    }
 
 //   if (command == 'exp'){ .This was wrong. 
