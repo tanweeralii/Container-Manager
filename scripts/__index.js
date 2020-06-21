@@ -138,20 +138,6 @@ jQuery(function($, undefined) {
      this.echo("\n")
      this.echo("Platform Engineer, Practo technologies. Jan 2017 - Present\n\n")
      this.echo("\n")
-     this.echo("Software Developement Engineer, Practo technologies. May 2016 - Dec 2016\n\n")
-     this.echo("\n")
-     this.echo("Freelance Software Architect, Unihire. Mar 2016 - April 2016\n\n")
-     this.echo("\n")
-     this.echo("Laravel and Angular Developer, Infinite Eurekas. Oct 2015 - Nov 2015\n\n")
-     this.echo("\n")
-     this.echo("Python Developer, Lazylad. Sep 2015 - Oct 2015\n\n")
-     this.echo("\n")
-     this.echo("Software Developer, Frankly.me, May 2015 - Jul 2015\n\n")
-     this.echo("\n")
-     this.echo("Software Developer, GeekShastra Pvt Ltd, May 2014 - Jul 2014\n\n")
-     this.echo("\n")
-     this.echo("Software Developer, Decent Solutions, Dec 2013 - Mar 2014\n\n")
-     this.echo("\n")
    }
 
    else {
