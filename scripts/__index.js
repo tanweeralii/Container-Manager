@@ -158,7 +158,6 @@ jQuery(function($, undefined) {
 
  }, {
  greetings: 'Hi dere, terminal addicts. want help any time just type help',
- name: 'chowmean.github.io',
  prompt: 'chowmean.github.io> ',
  color: 'green'
  });
