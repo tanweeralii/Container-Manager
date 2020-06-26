@@ -158,7 +158,7 @@ jQuery(function($, undefined) {
 
  }, {
  greetings: 'Hi dere, terminal addicts. want help any time just type help',
- prompt: 'chowmean.github.io> ',
+ prompt: 'thenewbieprojects.com> ',
  color: 'green'
  });
 });
