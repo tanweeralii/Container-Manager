@@ -136,7 +136,6 @@ jQuery(function($, undefined) {
 //   if (command == 'exp'){ .This was wrong. 
    else if (command == 'exp'){
      this.echo("\n")
-     this.echo("Platform Engineer, Practo technologies. Jan 2017 - Present\n\n")
      this.echo("\n")
    }
 
