@@ -1,16 +1,12 @@
-$('body').terminal({
-    hello: function(what) {
-        this.echo('Hello, ' + what + '. Wellcome to this terminal.');
-	}
-}, {
-        greetings: 'My First Terminal\n'
-});
-$('body').terminal({
-	title: function() {
-        return fetch('https://terminal.jcubic.pl')
-    	.then(r => r.text())
-    	.then(html => html.match(/<title>([^>]+)<\/title>/)[1]);
+$('body').terminal(function(command){
+    if (command !== '') {
+        if(command=="hey")
+            this.echo(command+' tanweer');
+        else
+            this.error("Unknown Command");
     }
 }, {
-    greetings: 'My First Terminal\n'
+        greetings: 'Get access to your Docker terminal',
+        name: 'js_demo',
+        prompt: 'Docker> '
 });
