@@ -1,25 +1,25 @@
 function list_running_containers(){
 	$.post('list_running_containers',function(req,res){
-		hello = document.getElementById('ans');
-		while(hello.firstChild){
-		   	hello.removeChild(hello.firstChild);
+		result_area = document.getElementById('ans');
+		while(result_area.firstChild){
+		   	result_area.removeChild(result_area.firstChild);
 		}
 	    var obj = JSON.parse(req);
-	    var obj1 = JSON.parse(obj.message);
-	    if(obj1==""){
-	        const p = document.createElement('p');
-	        p.textContent = "No Container is alive";
-	        hello.appendChild(p);
-		    hello.style.color = "white";
+	    var message = JSON.parse(obj.message);
+	    if(message==""){
+	        const row = document.createElement('row');
+	        row.textContent = "No Container is alive";
+	        result_area.appendChild(row);
+		    result_area.style.color = "white";
 	    }
 	    else{
-	        obj1.forEach((message) => {
+	        message.forEach((message) => {
             	const li = document.createElement('li');
-            	var i = message.Id.slice(0, 12).trim();
-	           	li.textContent = message.Image + " , " + i;
-	            hello.appendChild(li);
+            	var result = message.Id.slice(0, 12).trim();
+	           	li.textContent = message.Image + " , " + result;
+	            result_area.appendChild(li);
 	        })
-	      	hello.style.color = "white";
+	      	result_area.style.color = "white";
 	    }
 	});
 }
