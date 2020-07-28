@@ -25,7 +25,7 @@ app.post('/list_running_containers',function(req,res){
         var message = body;
         console.log(message);
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
@@ -36,7 +36,7 @@ app.post('/list_available_images',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
@@ -46,7 +46,7 @@ app.post('/list_all_containers',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
@@ -56,7 +56,7 @@ app.post('/stop_container',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
@@ -66,7 +66,7 @@ app.post('/start_conatiner',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
@@ -76,17 +76,17 @@ app.post('/restart_container',function(req,res){
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
 app.post('/get_container_logs',function(req,res){
     var request = require('request');
-    request('http://localhost:5000/containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1&follow=1&tail=10&since=1428990821', function (error, response, body) {
+    request('http://localhost:5000/containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1&follow=1&tail=10', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      res.json({message});
+      res.json({message: message});
     });
 });
 
@@ -101,3 +101,4 @@ app.post('/terminal_command',function(req,res){
 })
 
 app.listen(4000);
+console.log("started");

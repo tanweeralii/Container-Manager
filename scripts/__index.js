@@ -4,16 +4,15 @@ function list_running_containers(){
 		while(result_area.firstChild){
 		   	result_area.removeChild(result_area.firstChild);
 		}
-	    var obj = JSON.parse(req);
-	    var message = JSON.parse(obj.message);
-	    if(message==""){
+	    var obj = JSON.parse(req.message);
+	    if(obj==""){
 	        const para = document.createElement('p');
-	        row.textContent = "No Container is alive";
+	        para.textContent = "No Container is alive";
 	        result_area.appendChild(para);
 		    result_area.style.color = "white";
 	    }
 	    else{
-	        message.forEach((message) => {
+	        obj.forEach((message) => {
             	const li = document.createElement('li');
             	var result = message.Id.slice(0, 12).trim();
 	           	li.textContent = message.Image + " , " + result;
@@ -29,12 +28,11 @@ function list_available_images(){
 		while(result_area.firstChild){
 		    result_area.removeChild(result_area.firstChild);
 		}
-	    var obj = JSON.parse(req);
-	    var message = JSON.parse(obj.message);
+	    var obj = JSON.parse(req.message);
 	    const para = document.createElement('p');
 	    para.textContent = "Example: If output is 'xyz:latest , sha256:b65575bf92725cad124e7c0d35d479ee23a3281cf066dcaba86c311bbe5e0e31', then the image name is 'xyz' and image id is first 12 digit of sha256 i.e., b65575bf9272 in this case";
-	    hello.appendChild(para);
-        message.forEach((message) => {
+	    result_area.appendChild(para);
+        obj.forEach(message => {
 			const li = document.createElement('li');
             li.textContent = (message.RepoTags)[0] + " , " + message.Id;
            	result_area.appendChild(li);
@@ -48,9 +46,8 @@ function list_all_containers(){
 		while(result_area.firstChild){
 	        result_area.removeChild(result_area.firstChild);
 	    }
-	    var obj = JSON.parse(req);
-	    var message = JSON.parse(obj.message);
-       	message.forEach((message) => {
+	    var obj = JSON.parse(req.message);
+       	obj.forEach((message) => {
         	console.log(message);
 		    const li = document.createElement('li');
 		    var result = message.Id.slice(0, 12).trim();
@@ -110,9 +107,10 @@ function container_logs(){
 		while(result_area.firstChild){
 			result_area.removeChild(result_area.firstChild);
 		}
-	    var obj = JSON.parse(req);
-	    var res = obj.message.split("exit");
-	    res.forEach((message) => {
+		console.log(req.message);
+		var obj = JSON.parse(req.message);
+		console.log(obj);
+	    obj.forEach(message => {
 			const li = document.createElement('li');
 			var result = message.split("exit");
             li.textContent = result;
