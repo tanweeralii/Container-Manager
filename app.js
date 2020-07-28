@@ -23,6 +23,7 @@ app.post('/list_running_containers',function(req,res){
     request('http://localhost:5000/containers/json', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = body;
+        console.log(message);
       }
       res.json({message});
     });
