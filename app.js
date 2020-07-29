@@ -82,11 +82,16 @@ app.post('/restart_container',function(req,res){
 
 app.post('/get_container_logs',function(req,res){
     var request = require('request');
-    request('http://localhost:5000/containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1&follow=1&tail=10', function (error, response, body) {
+    request('http://localhost:5000/containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = body;
       }
-      res.json({message: message});
+      var decode = JSON.stringify(message);
+      function splitStr(str) { 
+        var string = str.split("exit");
+        res.json({string: string}); 
+      }
+      splitStr(message);
     });
 });
 
@@ -96,7 +101,7 @@ app.post('/terminal_command',function(req,res){
         if(!error&&response.statusCode==200){
           var message = body;
         }
-        res.json({message});
+        res.json({message: message});
     })
 })
 

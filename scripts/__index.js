@@ -107,12 +107,9 @@ function container_logs(){
 		while(result_area.firstChild){
 			result_area.removeChild(result_area.firstChild);
 		}
-		console.log(req.message);
-		var obj = JSON.parse(req.message);
-		console.log(obj);
-	    obj.forEach(message => {
+	    req.string.forEach(message => {
+			var result = message.split("#");
 			const li = document.createElement('li');
-			var result = message.split("exit");
             li.textContent = result;
             result_area.appendChild(li);
         	result_area.style.color = "white";
