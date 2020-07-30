@@ -12,6 +12,12 @@ app.get('/main',function(req,res){
 		.sendFile(path.join(__dirname,"main.html"));
 });
 
+app.get('/webtty',function(req,res){
+  res
+        .status(200)
+    .sendFile(path.join(__dirname,"terminal.html"));
+});
+
 app.get('/index',function(req,res){
     res
         .status(200)

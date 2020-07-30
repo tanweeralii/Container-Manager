@@ -116,3 +116,22 @@ function container_logs(){
 		});
 	});
 }
+function web_tty(){
+	var container_id = prompt("Please enter Container ID");
+    $.post('list_running_containers',function(req,res){
+	    var obj = JSON.parse(req.message);
+	    var flag=false;
+	    obj.forEach((message) => {
+         	var result = message.Id.slice(0, 12).trim();
+	     	if(result==container_id){	
+	     		flag=true;
+	     	}
+	    });
+	    if(flag==true){
+			window.open("http://localhost:4000/webtty","_blank");
+		}
+		else{
+			alert(container_id + " is not running.");
+		}
+	});
+}

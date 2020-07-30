@@ -13,6 +13,12 @@ body{
   width:25%;
   font-family: 'Titillium Web', sans-serif;
 }
+.about2{
+  float:left;
+  font-size:15px;
+  width:50%;
+  font-family: 'Titillium Web', sans-serif;
+}
 .app{
   font-size:15px;
   width:50%;
