@@ -128,6 +128,7 @@ function web_tty(){
 	     	}
 	    });
 	    if(flag==true){
+	    	sessionStorage.setItem("DockerID", container_id);
 			window.open("http://localhost:4000/webtty","_blank");
 		}
 		else{

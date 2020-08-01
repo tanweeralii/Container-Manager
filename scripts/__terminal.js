@@ -1,9 +1,10 @@
 $('body').terminal(function(command){
     if (command !== '') {
-        $.post('terminal_command',{'command':command},function(req,res){
-            var object = JSON.parse(req);
-            var object1 = JSON.parse(object.message);
-            this.echo("[[gb;green;black]" + object1 + "]");
+        var container_id = sessionStorage.getItem("DockerID");
+        $.post('terminal_command',{'command':command, 'container_id':container_id},function(req,res){
+            var obj = JSON.parse(req);
+            var object = JSON.parse(obj.message);
+            this.echo("[[gb;green;black]" + object + "]");
         })
     }
 }, {

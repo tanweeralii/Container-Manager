@@ -103,7 +103,7 @@ app.post('/get_container_logs',function(req,res){
 
 app.post('/terminal_command',function(req,res){
     var request = require('request');
-    request.post('http://localhost:5000/containers/'+req.body.command,function(error,response,body){
+    request.post('http://localhost:5000/containers/'+req.body.container_id+'/exec',,function(error,response,body){
         if(!error&&response.statusCode==200){
           var message = body;
         }
