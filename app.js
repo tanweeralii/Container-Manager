@@ -103,11 +103,33 @@ app.post('/get_container_logs',function(req,res){
 
 app.post('/terminal_command',function(req,res){
     var request = require('request');
-    request.post('http://localhost:5000/containers/'+req.body.container_id+'/exec',,function(error,response,body){
-        if(!error&&response.statusCode==200){
+    var command = req.body.command.split(" ");
+    request.post('http://localhost:5000/containers/'+req.body.container_id+'/exec',
+      {
+        "AttachStdin": "false",
+        "AttachStdout": "true",
+        "AttachStderr": "true",
+        "DetachKeys": "ctrl-p,ctrl-q",
+        "Tty": "false",
+        "Cmd": [
+          "\"" + command[0] + "\""
+        ],
+        "Env": [
+          "FOO=bar",
+          "BAZ=quux"
+        ]
+      },
+      function(error,response,body){
+        if(!error&&response.statusCode==201){
           var message = body;
+          console.log(body);
         }
-        res.json({message: message});
+        else{
+          console.log(error);
+          console.log("its a error");
+          console.log(response.statusCode);
+        }
+        /*res.json({message: message});*/
     })
 })
 
