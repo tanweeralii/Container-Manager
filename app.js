@@ -1,7 +1,10 @@
 var express = require('express');
 var path = require('path');
-var app = express();
+var querystring = require('querystring');
+var http = require('http');
 var bodyParser = require('body-parser');
+var request = require('request');
+var app = express();
 
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -102,9 +105,55 @@ app.post('/get_container_logs',function(req,res){
 });
 
 app.post('/terminal_command',function(req,res){
-    var request = require('request');
-    var command = req.body.command.split(" ");
-    request.post('http://localhost:5000/containers/'+req.body.container_id+'/exec',
+    var post_data = {
+      AttachStdin: false,
+      AttachStdout: true,
+      AttachStderr: true,
+      Tty: false,
+      Cmd: [
+        req.body.command
+      ]
+    };
+    
+    request({
+      url: 'http://localhost:5000/containers/'+req.body.container_id+'/exec',
+      method: "POST",
+      json: true,
+      headers: {
+        "content-type": "application/json",  
+      },
+      body: post_data
+    }, function (error, response, body){
+      if(!error){
+        var post_data_again = {
+          Detach: false,
+          Tty: false
+        };
+        request({
+          url: 'http://localhost:5000/exec/'+body.Id+'/start',
+          method: "POST",
+          json: true,
+          headers: {
+            "content-type": "application/json",
+          },
+          body: post_data_again
+        }, function(error, response, body){
+          if(!error){
+            console.log(body);
+            res.json({message: body});
+          }
+          else{
+            console.log(error);
+          }
+        })
+      }
+      else{
+        console.log("ERROR");
+        console.log(error);
+      }
+    });
+
+    /*request.post('http://localhost:5000/containers/'+req.body.container_id+'/exec',
       {
         "AttachStdin": "false",
         "AttachStdout": "true",
@@ -129,8 +178,8 @@ app.post('/terminal_command',function(req,res){
           console.log("its a error");
           console.log(response.statusCode);
         }
-        /*res.json({message: message});*/
-    })
+        /*res.json({message: message});
+    })*/
 })
 
 app.listen(4000);
