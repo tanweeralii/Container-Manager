@@ -21,10 +21,10 @@ app.get('/webtty',function(req,res){
     .sendFile(path.join(__dirname,"terminal.html"));
 });
 
-app.get('/index',function(req,res){
+app.get('/upload',function(req,res){
     res
         .status(200)
-        .sendFile(path.join(__dirname,"index.html"));
+        .sendFile(path.join(__dirname,"upload.html"));
 })
 
 app.post('/list_running_containers',function(req,res){
@@ -104,15 +104,13 @@ app.post('/get_container_logs',function(req,res){
     });
 });
 
+
 app.post('/terminal_command',function(req,res){
     var post_data = {
       AttachStdin: false,
       AttachStdout: true,
       AttachStderr: true,
-      Tty: false,
-      Cmd: [
-        req.body.command
-      ]
+      Cmd: ["bash","-c",req.body.command]
     };
     
     request({
@@ -124,6 +122,7 @@ app.post('/terminal_command',function(req,res){
       },
       body: post_data
     }, function (error, response, body){
+      console.log(response.body)
       if(!error){
         var post_data_again = {
           Detach: false,
