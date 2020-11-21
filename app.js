@@ -4,6 +4,8 @@ var querystring = require('querystring');
 var http = require('http');
 var bodyParser = require('body-parser');
 var request = require('request');
+var formidable = require('formidable');
+var fs = require('fs');
 var app = express();
 
 app.use(express.static(path.join(__dirname)));
