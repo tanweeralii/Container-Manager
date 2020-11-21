@@ -20,6 +20,12 @@
 			<i></i>
 		</div>
 		<input type="path" placeholder="/home/foo/bar" required>
+		<form action="/uploadProfilePicture" 
+      		enctype="multipart/form-data" method="POST"> 
+        	<span>Upload Files</span>   
+        	<input type="file" name="upload_file" required/> <br> 
+        	<input type="submit" value="submit">  
+    	</form> 
 		<button>Upload</button>
 	</div>
 
