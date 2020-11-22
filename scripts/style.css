@@ -6,11 +6,11 @@
 }
 
 body {
-	background: #448ed3 ;
+	background: whitesmoke ;
 	font-family: "Lato" ;
 }
 .wrap {
-	width:250px;
+	width:350px;
 	height: auto;
 	margin: auto;
 	margin-top: 10%;
@@ -36,8 +36,8 @@ body {
 .wrap input {
 	border: none;
 	background: #fff;
-  font-family:Lato ;
-  font-weight:700 ;
+  	font-family:Lato ;
+  	font-weight:700 ;
 	display: block;
 	height: 40px;
 	outline: none;
@@ -74,16 +74,21 @@ body {
 }
 .wrap button {
 	width: 100%;
-	border-radius: 7px;
-	background: #b6ee65;
 	text-decoration: center;
-	border: none;
-	color: #51771a;
-  margin-top:-5px;
+	color:black;
+	font-family: 'Roboto Mono', monospace;
+  	margin-top:-5px;
 	padding-top: 14px;
 	padding-bottom: 14px;
 	outline: none;
-	font-size: 13px;	
-	border-bottom: 3px solid #307d63;
+	font-size: 13px;
+	border:2px solid #000000;
+	border-radius:10px;
+	transition-duration: 0.4s;
+	-webkit-transition-duration: 0.4s;
 	cursor: pointer;
+}
+.wrap button:hover{
+	color: red;
+  	border: 2px solid red;
 }

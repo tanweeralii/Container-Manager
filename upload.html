@@ -5,30 +5,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/reset.css">
+		<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="css/reset.css">
         <link rel="stylesheet" href="scripts/reset.css">
-        <link rel="stylesheet" href="scripts/style.css" media="screen" type="text/css" />
+		<link rel="stylesheet" href="scripts/style.css" media="screen" type="text/css" />
 		<title>Upload Files</title>
     </head>
     <body>
         <div class="wrap">
 		<div class="avatar">
-      		<img src="http://cdn.ialireza.me/avatar.png">
+      		<img src="https://img.icons8.com/windows/32/000000/docker.png"/>
 		</div>
-		<input type="text" placeholder="container_id" required>
-		<div class="bar">
-			<i></i>
-		</div>
-		<input type="path" placeholder="/home/foo/bar" required>
-		<form action="/uploadProfilePicture" 
-      		enctype="multipart/form-data" method="POST"> 
-        	<span>Upload Files</span>   
-        	<input type="file" name="upload_file" required/> <br> 
-        	<input type="submit" value="submit">  
-    	</form> 
-		<button>Upload</button>
+		<form id="myform" enctype="multipart/form-data" method="POST">
+			<input type="text" placeholder="container_id" required>
+			<div class="bar">
+				<i></i>
+			</div>
+			<input type="path" placeholder="/home/foo/bar" required> 
+        	<input type="file" name="upload_file" required/>
+        	<button type="submit">Upload</button>
+    	</form>
 	</div>
-
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="http://code.jquery.com/jquery-latest.js"></script>
     </body>
 </html>

@@ -4,10 +4,10 @@ var querystring = require('querystring');
 var http = require('http');
 var bodyParser = require('body-parser');
 var request = require('request');
-var multer = require("multer");
-var fs = require('fs');
+var upload = require('express-fileupload');
 var app = express();
 
+app.use(upload());
 app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -30,6 +30,7 @@ app.get('/upload',function(req,res){
 })
 
 app.post('/list_running_containers',function(req,res){
+    console.log("hello");
     var request = require('request');
     request('http://localhost:5000/containers/json', function (error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -40,6 +41,23 @@ app.post('/list_running_containers',function(req,res){
     });
 });
 
+
+app.post('/upload',function(req,res){
+    if(req.files){
+      console.log(req.files);
+      var file = req.files.upload_file;
+      var filename = file.name;
+      console.log(filename);
+      file.mv('./uploads/'+filename, function(err){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log("File Uploaded");
+        }
+      });
+    }
+});
 
 app.post('/list_available_images',function(req,res){
     var request = require('request');
@@ -181,7 +199,7 @@ app.post('/terminal_command',function(req,res){
         }
         /*res.json({message: message});
     })*/
-})
+}); 
 
 app.listen(4000);
 console.log("started");

@@ -138,4 +138,4 @@ function web_tty(){
 }
 function upload(){
 	window.open("http://localhost:4000/upload","_blank")
-}
+};
