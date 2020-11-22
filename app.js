@@ -5,6 +5,7 @@ var http = require('http');
 var bodyParser = require('body-parser');
 var request = require('request');
 var upload = require('express-fileupload');
+const { exec } = require('child_process');
 var app = express();
 
 app.use(upload());
@@ -44,7 +45,8 @@ app.post('/list_running_containers',function(req,res){
 
 app.post('/upload',function(req,res){
     if(req.files){
-      console.log(req.files);
+      console.log(req.body.id_of_container);
+      console.log(req.body.path_in_container)
       var file = req.files.upload_file;
       var filename = file.name;
       console.log(filename);
@@ -54,6 +56,30 @@ app.post('/upload',function(req,res){
         }
         else{
           console.log("File Uploaded");
+          const dockerFileUploadCommand = `sudo docker cp /var/www/html/Container-Manager/uploads/${filename} ${req.body.id_of_container}:${req.body.path_in_container}`;
+          exec(dockerFileUploadCommand, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+          });
+          const delete_file = `sudo rm ./uploads/${filename}`;
+          exec(delete_file, (error, stdout, stderr) => {
+            if (error) {
+              console.log(`error: ${error.message}`);
+              return;
+            }
+            if (stderr) {
+              console.log(`stderr: ${stderr}`);
+              return;
+            }
+            console.log(`stdout: ${stdout}`);
+          });
         }
       });
     }
