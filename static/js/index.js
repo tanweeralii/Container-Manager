@@ -1,3 +1,6 @@
+var url = "http://127.0.0.1";
+var port = "6001";
+
 function list_running_containers(){
 	$.post('list_running_containers',function(req,res){
 		result_area = document.getElementById('ans');
@@ -118,7 +121,7 @@ function container_logs(){
 }
 function web_tty(){
 	var container_id = prompt("Please enter Container ID");
-    $.post('list_running_containers',function(req,res){
+    	$.post('list_running_containers',function(req,res){
 	    var obj = JSON.parse(req.message);
 	    var flag=false;
 	    obj.forEach((message) => {
@@ -128,14 +131,15 @@ function web_tty(){
 	     	}
 	    });
 	    if(flag==true){
-	    	sessionStorage.setItem("DockerID", container_id);
-			window.open("http://localhost:4000/webtty","_blank");
-		}
-		else{
-			alert(container_id + " is not running.");
-		}
+		console.log(container_id);
+	    	localStorage.setItem("DockerID", container_id);
+		window.open(url+":"+port+"/webtty","_parent");
+	    }
+	    else{
+	    	alert(container_id + " is not running.");
+ 	    }
 	});
 }
 function upload(){
-	window.open("http://localhost:4000/upload","_blank")
+	window.open(url+":"+port+"/upload","_blank")
 };

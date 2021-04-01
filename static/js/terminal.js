@@ -1,6 +1,7 @@
 $('body').terminal(function(command){
     if (command !== '') {
         var container_id = sessionStorage.getItem("DockerID");
+	console.log(container_id)
         var result = function () {
             var tmp = null;
             $.ajax({
