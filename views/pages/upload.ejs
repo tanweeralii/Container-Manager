@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<script src="js/upload.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Titillium+Web&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+	<title>Upload Files</title>
+    </head>
+    <body>
+        <div class="wrap">
+			<div class="avatar">
+      			<img src="https://img.icons8.com/windows/32/000000/docker.png"/>
+			</div>
+		<div class="custom-select" style="width:350px;">
+            <select id="containers_id">
+            	<option value="0">Select Container</option>
+            </select>
+		</div>
+		</br>
+		<input id="upload_file_" type="file" name="upload_file" multiple="multiple" required/>
+		</br>
+		<form id="myform" enctype="multipart/form-data" method="POST">
+			<div class="bar">
+				<i></i>
+			</div>
+			<input id="fillthis" type="hidden" required>
+			<input id="path" type="path" placeholder="/home/foo/bar" name="path_in_container" required> 
+        	<button type="submit">Upload</button>
+		</form>
+		<div class="progress">
+            <div class="progress-bar" role="progressbar"></div>
+		</div>
+			<p id="printDirectoriesHere"></p>
+		</div>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+    </body>
+</html>

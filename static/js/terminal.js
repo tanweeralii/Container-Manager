@@ -1,3 +1,22 @@
+var BASE_URL = "http://localhost:3000/";
+var n = localStorage.getItem("token")
+console.log(n);
+
+if(!n) n=0;
+
+const Http = new XMLHttpRequest();
+const url=BASE_URL+"auth/auth/";
+Http.open("POST", url);
+Http.setRequestHeader("Authorization",JSON.parse(n));
+Http.send();
+
+Http.onreadystatechange = (e) => {
+    console.log("jello");
+    x=JSON.parse(Http.responseText);
+    if(x.status_code!=200)
+        location.replace(BASE_URL+"login")
+}
+
 $('body').terminal(function(command){
     if (command !== '') {
         var container_id = sessionStorage.getItem("DockerID");

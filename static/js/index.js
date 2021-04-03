@@ -1,4 +1,22 @@
-var url = "http://127.0.0.1";
+var BASE_URL = "http://localhost:3000/";
+var n = localStorage.getItem("token")
+console.log(n);
+
+if(!n) n=0;
+
+const Http = new XMLHttpRequest();
+const url=BASE_URL+"auth/auth/";
+Http.open("POST", url);
+Http.setRequestHeader("Authorization",JSON.parse(n));
+Http.send();
+
+Http.onreadystatechange = (e) => {
+  	x=JSON.parse(Http.responseText);
+  	if(x.status_code!=200)
+        location.replace(BASE_URL+"login")
+}
+
+//var BASE_URL = "http://127.0.0.1";
 var port = "6001";
 
 function list_running_containers(){
@@ -133,7 +151,7 @@ function web_tty(){
 	    if(flag==true){
 		console.log(container_id);
 	    	localStorage.setItem("DockerID", container_id);
-		window.open(url+":"+port+"/webtty","_parent");
+		window.open(BASE_URL+"webtty","_parent");
 	    }
 	    else{
 	    	alert(container_id + " is not running.");
@@ -141,5 +159,5 @@ function web_tty(){
 	});
 }
 function upload(){
-	window.open(url+":"+port+"/upload","_blank")
+	window.open(BASE_URL+"upload","_blank")
 };
