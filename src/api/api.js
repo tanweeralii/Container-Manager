@@ -16,9 +16,10 @@ api.use('/container',jwtVerify, CONT.listImagesRouter);
 api.use('/container',jwtVerify, CONT.listRunningContainersRouter);
 
 //terminal
-api.use('/prof',jwtVerify, TERM.terminalRouter);
+api.use('/terminal',jwtVerify, TERM.terminalRouter);
 
 //upload
-api.use('/projects', UPLO.uploadFileRouter);
+api.use('/upload', UPLO.uploadFileRouter);
+api.use('/upload', UPLO.ListDirectoriesRouter);
 
 module.exports = api;

@@ -10,7 +10,7 @@ terminalRouter.post('/',function(req,res){
     };
 
     request({
-        url: 'http://localhost:5000/containers/'+req.body.container_id+'/exec',
+        url: process.env.DOCKER_API_URL+'containers/'+req.body.container_id+'/exec',
         method: "POST",
         json: true,
         headers: {
@@ -24,7 +24,7 @@ terminalRouter.post('/',function(req,res){
                 Tty: false
             };
             request({
-                url: 'http://localhost:5000/exec/'+body.Id+'/start',
+                url: process.env.DOCKER_API_URL+'exec/'+body.Id+'/start',
                 method: "POST",
                 json: true,
                 headers: {

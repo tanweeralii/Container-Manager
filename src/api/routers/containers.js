@@ -9,17 +9,16 @@ const listRunningContainersRouter = require('express').Router();
 const request = require('request');
 
 listRunningContainersRouter.post('/runningContainers',function(req,res){
-    request('http://localhost:5000/containers/json', function (error, response, body) {
+    request(process.env.DOCKER_API_URL+'containers/json', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = body;
-        console.log(message);
       }
       res.json({message: message});
     });
 });
 
 listImagesRouter.post('/images',function(req,res){
-    request('http://localhost:5000/images/json', function (error, response, body) {
+    request(process.env.DOCKER_API_URL+'images/json', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = body;
       }
@@ -28,7 +27,7 @@ listImagesRouter.post('/images',function(req,res){
 });
 
 listContainersRouter.post('/allContainers',function(req,res){
-    request('http://localhost:5000/containers/json?all=1', function (error, response, body) {
+    request(process.env.DOCKER_API_URL+'containers/json?all=1', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = body;
       }
@@ -37,7 +36,7 @@ listContainersRouter.post('/allContainers',function(req,res){
 });
 
 stopContainerRouter.post('/stopContainer',function(req,res){
-    request.post('http://localhost:5000/containers/'+req.body.id+'/stop', function (error, response, body) {
+    request.post(process.env.DOCKER_API_URL+'containers/'+req.body.id+'/stop', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
@@ -46,7 +45,7 @@ stopContainerRouter.post('/stopContainer',function(req,res){
 });
 
 startContainerRouter.post('/startConatiner',function(req,res){
-    request.post('http://localhost:5000/containers/'+req.body.id+'/start', function (error, response, body) {
+    request.post(process.env.DOCKER_API_URL+'containers/'+req.body.id+'/start', function (error, response, body) {
       if (!error && response.statusCode == 200) {
         var message = "Done";
       }
@@ -55,7 +54,7 @@ startContainerRouter.post('/startConatiner',function(req,res){
 });
 
 restartContainerRouter.post('/restartContainer',function(req,res){
-    request.post('http://localhost:5000/containers/'+req.body.id+'/restart', function (error, response, body) {
+    request.post(process.env.DOCKER_API_URL+'containers/'+req.body.id+'/restart', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var message = "Done";
         }
@@ -64,7 +63,7 @@ restartContainerRouter.post('/restartContainer',function(req,res){
 });
 
 getContainerLogsRouter.post('/logs',function(req,res){
-    request('http://localhost:5000/containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1', function (error, response, body) {
+    request(process.env.DOCKER_API_URL+'containers/'+req.body.id+'/logs?stderr=1&stdout=1&timestamps=1', function (error, response, body) {
         if (!error && response.statusCode == 200) {
             var message = body;
         }

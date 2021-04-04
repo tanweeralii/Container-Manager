@@ -1,6 +1,5 @@
 var BASE_URL = "http://localhost:3000/";
 var n = localStorage.getItem("token")
-console.log(n);
 
 if(!n) n=0;
 
@@ -20,7 +19,6 @@ Http.onreadystatechange = (e) => {
 $('body').terminal(function(command){
     if (command !== '') {
         var container_id = sessionStorage.getItem("DockerID");
-	console.log(container_id)
         var result = function () {
             var tmp = null;
             $.ajax({
@@ -28,7 +26,11 @@ $('body').terminal(function(command){
                 'type': "POST",
                 'global': false,
                 'dataType': 'html',
-                'url': 'terminal_command',
+                'url': 'api/terminal',
+                'headers':{"Authorization":JSON.parse(n)},
+                'xhrFields':{
+                    withCredentials: true,
+                },
                 'data': {'command':command, 'container_id':container_id},
                 'success': function (data) {
                     tmp = data;
