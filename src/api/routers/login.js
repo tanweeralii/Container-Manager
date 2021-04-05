@@ -17,13 +17,13 @@ loginRouter.post('/', async (req, res)=>{
             if (!user){
                 return res.status(200).json({
                     status_code: 401,
-                    message: 'Authentication failed. User Does not Exists.'
+                    message: 'Authentication failed. User Does not Exists.',
                 })
             }
             else if (!bcrypt.compareSync(password, user.password)) {
                 return res.status(200).json({
                     status_code: 401,
-                    message: 'Authentication failed. Invalid password.'
+                    message: 'Authentication failed. Invalid password.',
                 });
             }
             else{

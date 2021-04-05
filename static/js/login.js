@@ -2,10 +2,10 @@ $(document).ready(function(){
     var checkbox = document.querySelector('input[name=myCheckbox]');
     checkbox.addEventListener( 'change', function(event) {
         if(checkbox.checked) {
-        sessionStorage.setItem('set',1);
+            sessionStorage.setItem('set',1);
         }
         else{
-        sessionStorage.setItem('set',0);
+            sessionStorage.setItem('set',0);
         }
     });
 });
@@ -17,42 +17,36 @@ const form = {
 };
 
 form.submit.addEventListener('click', () => {
-    const request = new XMLHttpRequest();
-    request.onload = () => {
-        let responseObject = null;
-        try{
-            responseObject = JSON.parse(request.responseText);
-        }catch(e){
-            console.error('Could not parse JSON!');
-        }
-        if(responseObject){
-            handleResponse(responseObject);
-        }
-    }
-    const requestData = `email=${form.email.value}&password=${form.password.value}`;
-    request.open('post','Login');
-    request.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-    request.send(requestData);
+    $.ajax({
+		url: 'auth/login',
+		type: 'POST',
+        data: {'username':form.email.value, 'password': form.password.value},
+		xhrFields:{
+			withCredentials: true,
+		},
+		success: function(req, res) {
+			let responseObject = null;
+            console.log(req)
+            try{
+                if(req.status_code==200){
+                    localStorage.token=JSON.stringify(req.jwt_token);
+                    window.location.replace("http://"+window.location.host+"/");
+                }
+                else{
+                    while(form.message.firstChild){
+                        form.message.removeChild(form.message.firstChild);
+                    }
+                    const li = document.createElement('li');
+                    li.textContent = req.message;
+                    form.message.appendChild(li);
+                    form.message.style.display = "block";
+                }
+            }catch(e){
+                console.error('Could not parse JSON!');
+            }
+            if(responseObject){
+                handleResponse(responseObject);
+            }
+		}
+	});
 });
-
-function handleResponse(responseObject){
-    if(responseObject.ok=='true'){
-        if(sessionStorage.getItem('set')==1){
-            var uname2 = sessionStorage.getItem('uname');
-            localStorage.setItem('uname', uname2);
-        }
-        while(form.message.firstChild){
-            form.message.removeChild(form.message.firstChild);
-        }
-        window.location.replace("http://"+window.location.host+"/");
-    }
-    else{
-        while(form.message.firstChild){
-            form.message.removeChild(form.message.firstChild);
-        }
-        const li = document.createElement('li');
-        li.textContent = responseObject.message;
-        form.message.appendChild(li);
-        form.message.style.display = "block";
-    }
-};
