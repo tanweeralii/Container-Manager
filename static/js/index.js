@@ -90,7 +90,6 @@ function list_all_containers(){
 			}
 			var obj = JSON.parse(req.message);
 			obj.forEach((message) => {
-				console.log(message);
 				const li = document.createElement('li');
 				var result = message.Id.slice(0, 12).trim();
 				li.textContent = message.Image + " , " + result;
@@ -219,7 +218,7 @@ function web_tty(){
 				}
 			});
 			if(flag==true){
-				localStorage.setItem("DockerID", container_id);
+				sessionStorage.setItem("DockerID", container_id);
 				window.open(BASE_URL+"webtty","_parent");
 			}
 			else{

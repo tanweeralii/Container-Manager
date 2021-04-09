@@ -26,7 +26,6 @@ form.submit.addEventListener('click', () => {
 		},
 		success: function(req, res) {
 			let responseObject = null;
-            console.log(req)
             try{
                 if(req.status_code==200){
                     localStorage.token=JSON.stringify(req.jwt_token);

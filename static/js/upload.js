@@ -26,8 +26,6 @@ $.ajax({
         var obj = JSON.parse(req.message);
         obj.forEach((message) => {
             var result = message.Id.slice(0, 12).trim();
-            console.log(result);
-            console.log(message.Image + "-" + result);
             $("#containers_id").append($("<option />").val(result).text(message.Image + "-" + result));
         })
         var x, i, j, l, ll, selElmnt, a, b, c;
@@ -113,7 +111,6 @@ function closeAllSelect(elmnt) {
 then close all select boxes: */
 window.onload = function () {
     $("#path").keypress(function(event){
-        console.log("pressed")
         if(event.which==47){
             var formData = new FormData();
             formData.append("id",$("#fillthis").val());
@@ -146,15 +143,12 @@ window.onload = function () {
         var formData = new FormData();
         for(var i = 0;i<file_data.length;i++){
             formData.append("upload_file", file_data[i], file_data[i].name);
-            console.log(file_data[i].name);
         }
         var other_data = $(this).serializeArray();
         $.each(other_data,function(key,input){
             formData.append(input.name,input.value);
         });
         formData.append("id_of_container",$("#fillthis").val());
-        console.log($("#fillthis").val());
-        console.log("Everything ready to send");
         $.ajax({
             url: 'api/upload/upload',
             type: 'POST',
@@ -166,7 +160,6 @@ window.onload = function () {
                 withCredentials: true,
             },
             success: function(data){
-                console.log('upload successful!\n' + data);
                 $("#myform").trigger("reset");
                 alert(data.message)
             },

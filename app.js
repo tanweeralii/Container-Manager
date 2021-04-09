@@ -3,7 +3,6 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const upload = require('express-fileupload');
-const store = require('store2');
 const port = process.env.APP_PORT;
 
 require('./src/database/setup.js');
@@ -11,7 +10,6 @@ require('./src/database/setup.js');
 
 const apiRouter = require('./src/api/api');
 const authRouter = require('./src/api/auth');
-const jwtMiddleware= require('./src/middlewares/jwt');
 
 app.set('view engine', 'ejs');
 app.use(upload());
