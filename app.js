@@ -3,7 +3,6 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const upload = require('express-fileupload');
-const { exec } = require('child_process');
 const store = require('store2');
 const port = process.env.APP_PORT;
 
