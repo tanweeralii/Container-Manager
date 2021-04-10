@@ -11,7 +11,7 @@ Web interface to manage docker containers through [Docker's Engine API](https://
 
 * **Web terminal to run bash commands inside running containers**
 * **Upload files inside running containers**
-* ***Logs of Containers**
+* **Logs of Containers**
 * **List Running Containers**
 * **List Images**
 * **List All Containers**
@@ -41,4 +41,9 @@ $ npm install i
 ```
 $ node app.js
 ```
-6. Make sure to comment [9th line of app.js](https://github.com/tanweeralii/Container-Manager/blob/de8ef7aec6da5a00faac8cae4ef102549ef2ca8d/app.js#L9) after you run webserver first time as database setup has already done.
+6. Use these default credentials to Login.
+```
+username : test
+password : testpassword
+```
+7. Make sure to comment [9th line of app.js](https://github.com/tanweeralii/Container-Manager/blob/de8ef7aec6da5a00faac8cae4ef102549ef2ca8d/app.js#L9) after you run webserver first time as database setup has already done.

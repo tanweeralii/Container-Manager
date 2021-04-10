@@ -1,0 +1,1 @@
+`sample.js` will create a test user named as `test` with password `testpassword`.
