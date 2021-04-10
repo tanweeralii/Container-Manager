@@ -9,15 +9,15 @@ Web interface to manage docker containers through [Docker's Engine API](https://
 
 ## Features
 
+* **Web terminal to run bash commands inside running containers**
+* **Upload files inside running containers**
+* ***Logs of Containers**
 * **List Running Containers**
 * **List Images**
 * **List All Containers**
 * **Stop Containers**
 * **Start Containers**
 * **Restart Containers**
-* ***Logs of Containers**
-* **Web terminal to run bash commands inside running containers**
-* **Upload files inside running containers**
 
 ## Setup
 
