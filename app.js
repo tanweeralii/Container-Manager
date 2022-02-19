@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const app = express();
 const upload = require('express-fileupload');
-const port = process.env.APP_PORT;
+const port = process.env.APP_PORT || 3000;
 
 require('./src/database/setup.js');
 //require('./src/database/sample.js');
